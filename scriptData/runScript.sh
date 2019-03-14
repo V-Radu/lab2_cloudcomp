@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 # Move to the lab2 directory
-cd ~/Desktop/College/InformationSystemsStage3/Cloud_Computing/lab2
+cd ~/Desktop/College/InformationSystemsStage3/Cloud_Computing/lab2/serverApp/scriptData
 pwd
 
 # no space when assigning variable value
 # Tag name to search for VM instance
 myTag="newVM"
 
-# Create a VM on my Amazon account with the myTag value  and to my security group
+# Create a VM on my Amazon account with the myTag value  and add to my security group
 
-
+aws ec2 run-instances --image-id "ami-09f0b8b3e41191524" --instance-type "t2.micro" --security-group-ids "sg-026b7617f05cf8cb6" --security-groups "launch-wizard-1" --key-name "RaduAmazoneKey"  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value='$myTag'}]' --dry-run 
 
 
 # Details of the instances available in my ec2,  the Tags and instanceId
@@ -60,3 +60,10 @@ rm temp.json
 
 printf "Tag: %s\nVM InstanceId: %s\n" $myTag $instanceId
 fi
+
+# connect to VM via ssh
+printf "\nStart to conect to VM\n\n****************************\n**********  AMAZON CLOUD   *****\n***************************\n"
+printf "passed scriped to VM\n"
+cat vm_commands.sh | ssh -t -i "RaduAmazoneKey.pem" ubuntu@54.194.91.150
+printf "script executed succesfully\n"
+printf "\nVM connection END\n\n****************************\n**********  LOCAL HOST   *****\n*********    ******************\n"
