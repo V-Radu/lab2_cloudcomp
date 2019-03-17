@@ -23,3 +23,7 @@ def get_status():
 	nr_cpus =str(multiprocessing.cpu_count())
 	text = "Host Name: %s <br>PublicIP: %s<br>Number of CPUs: %s<br>Memory: %s Gbs<br>" %(host_name, my_ip, nr_cpus, my_memory)
 	return text
+
+@app.route('/stop')
+def get_status():
+	server.shutdown()
