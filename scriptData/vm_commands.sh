@@ -3,9 +3,9 @@ rm -rf lab2
 
 mkdir lab2
 cd lab2
-sudo apt-get update
-sudo apt-get install python3
-sudo apt-get install python3-pip
+sudo apt-get --assume-yes update
+sudo apt-get --assume-yes install python3
+sudo apt-get --assume-yes install python3-pip
 sudo pip3 install virtualenv
 virtualenv myVEN
 source myVEN/bin/activate
