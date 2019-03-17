@@ -88,9 +88,9 @@ rm temp2.json
 
 
 # connect to VM via ssh
-printf "\nStart to conect to VM\n\n****************************\n**********  AMAZON CLOUD   *****\n***************************\n"
+printf "\nStart to connect to VM\n\n****************************\n**********  AMAZON CLOUD   *****\n***************************\n"
 printf "Passing script to VM\n"
-# wait 15 seconds to make sure the vm is completed and ready to accept connection
+# wait 20 seconds to make sure the vm is completed and ready to accept connection
 # send vm_coomands to VM for execution, and star an new proccess that will terminate the VM
 sleep 20
 cat vm_commands.sh | ssh -t -i "RaduAmazoneKey.pem" ubuntu@$VMpublicIP&./stopScript.sh $VMpublicIP
