@@ -6,11 +6,11 @@ pwd
 
 # no space when assigning variable value
 # Tag name to search for VM instance
-myTag="newVM2"
+myTag="newVM3"
 
 # Create a VM on my Amazon account with the myTag value  and add to my security group
 
-aws ec2 run-instances --image-id "ami-09f0b8b3e41191524" --instance-type "t2.micro" --security-group-ids "sg-026b7617f05cf8cb6" --security-groups "launch-wizard-1" --key-name "RaduAmazoneKey"  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value='$myTag'}]' --dry-run 
+aws ec2 run-instances --image-id "ami-09f0b8b3e41191524" --instance-type "t2.micro" --security-group-ids "sg-026b7617f05cf8cb6" --security-groups "launch-wizard-1" --key-name "RaduAmazoneKey"  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value='$myTag'}]' 
 
 
 # Details of the instances available in my ec2,  the Tags and instanceId
@@ -92,7 +92,10 @@ printf "\nStart to conect to VM\n\n****************************\n**********  AMA
 printf "Passing script to VM\n"
 # wait 15 seconds to make sure the vm is completed and ready to accept connection
 # send vm_coomands to VM for execution, and star an new proccess that will terminate the VM
-sleep 15
+sleep 20
 cat vm_commands.sh | ssh -t -i "RaduAmazoneKey.pem" ubuntu@$VMpublicIP&./stopScript.sh $VMpublicIP
+
+aws ec2 terminate-instances --instance-ids $instanceId
+
 printf "script executed succesfully\n"
 printf "\nVM connection END\n\n****************************\n**********  LOCAL HOST   *****\n*********    ******************\n"
