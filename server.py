@@ -2,6 +2,7 @@ import multiprocessing
 import socket
 import os
 from flask import Flask
+from flask import request
 app = Flask(__name__)
 
 
@@ -25,5 +26,11 @@ def get_status():
 	return text
 
 @app.route('/stop')
-def get_status():
+def shut_down():
+	func = request.environ.get('werkzeug.server.shutdown')
+	if func is None:
+		raise RuntimeError('Not running with the Werkzeug Server')
+	func()
+	return 'Server shutting down...'
+
 	server.shutdown()
