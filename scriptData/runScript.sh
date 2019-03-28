@@ -6,11 +6,11 @@ pwd
 
 # no space when assigning variable value
 # Tag name to search for VM instance
-myTag="newVM3"
+myTag="new"
 
 # Create a VM on my Amazon account with the myTag value  and add to my security group
 
-aws ec2 run-instances --image-id "ami-09f0b8b3e41191524" --instance-type "t2.micro" --security-group-ids "sg-026b7617f05cf8cb6" --security-groups "launch-wizard-1" --key-name "RaduAmazoneKey"  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value='$myTag'}]' 
+aws ec2 run-instances --image-id "ami-09f0b8b3e41191524" --instance-type "t2.micro" --security-group-ids "sg-026b7617f05cf8cb6" --security-groups "launch-wizard-1" --key-name "RaduAmazoneKey"  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value='$myTag'}]' --dry-run 
 
 
 # Details of the instances available in my ec2,  the Tags and instanceId
